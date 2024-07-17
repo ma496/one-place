@@ -1,13 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { DrizzleService } from './drizzle/drizzle.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService, private readonly drizzleService: DrizzleService) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello() {
-    return this.drizzleService.db.query.users.findMany();
+    return this.appService.getHello();
   }
 }
