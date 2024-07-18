@@ -10,6 +10,7 @@ import { useI18nZodErrors } from '@/lib/useI18nZodErrors'
 import { SignInDto, useSignInMutation } from "@/store/api/authApi";
 import { localeStorageConst } from "@/lib/constants";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useRouter } from "@/navigation";
 
 const formSchema = z.object({
   username: z.string().email(),
@@ -19,11 +20,12 @@ const formSchema = z.object({
 export function LoginForm() {
   useI18nZodErrors()
   const t = useTranslations()
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
+      username: '',
       password: ''
     },
   })
@@ -37,7 +39,7 @@ export function LoginForm() {
     //   alert(JSON.stringify(res.error))
     // }
     if ('data' in res) {
-      setSignInInfo(res.data)
+      // setSignInInfo(res.data)
       router.push('/')
     }
   }
@@ -47,7 +49,7 @@ export function LoginForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="email"
+          name="username"
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t('Email')}</FormLabel>

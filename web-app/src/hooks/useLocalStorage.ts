@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getLocalStorageValue, setLocalStorageValue } from "../utils"
+import { getLocalStorageValue, setLocalStorageValue } from "../lib/utils"
 
 export function useLocalStorage<T>(key: string, fallbackValue: T | null = null) {
   const [value, setValue] = useState<T | null>(getLocalStorageValue(key, fallbackValue))
